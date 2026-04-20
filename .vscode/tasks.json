@@ -1,0 +1,25 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "gcc",
+            "args": [
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "${workspaceFolder}/Code/Linked_List.c",
+                "${workspaceFolder}/Code/Test_List.c",
+                "-o",
+                "${workspaceFolder}/test.exe"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compile C project"
+        }
+    ]
+}
