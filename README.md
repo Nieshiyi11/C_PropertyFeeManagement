@@ -1,6 +1,6 @@
 # C语言工程实践项目 ———— 物业费管理系统
 
-# Clanguage Project ———— Propertyfee Management
+# C Language Project ———— Propertyfee Management
 
 ---
 
