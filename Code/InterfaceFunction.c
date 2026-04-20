@@ -22,7 +22,7 @@ ResidentList* list_Create(void){
     //5. 哑节点next = NULL
     dummy->next = NULL;
     //6. 令size=0
-    list->head = NULL;
+    list->head = dummy;
     list->size = 0;
     //7. 返回 list
     return list;
@@ -68,7 +68,6 @@ int list_Append(ResidentList* list, Resident r){
     }
     //循环接受以后tail就是最后一个节点
     //6. 尾插
-    Node* tail = (Node*)malloc(sizeof(Node));
     tail->next = newNode;
     list->size++; //别忘记添加好节点后 真实节点数＋1
     return 1;
