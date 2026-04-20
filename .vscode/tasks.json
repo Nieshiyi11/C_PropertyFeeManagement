@@ -9,8 +9,10 @@
                 "-Wall",
                 "-Wextra",
                 "-g",
-                "${workspaceFolder}/Code/Linked_List.c",
-                "${workspaceFolder}/Code/Test_List.c",
+                "-finput-charset=UTF-8",
+                "-fexec-charset=UTF-8",
+                "${workspaceFolder}/Code/InterfaceFunction.c",
+                "${workspaceFolder}/Code/Test.c",
                 "-o",
                 "${workspaceFolder}/test.exe"
             ],
