@@ -51,4 +51,19 @@ int list_Append(ResidentList* list, Resident r); //尾插，返回1成功/0失�
 Node* list_FindID(ResidentList* list, const char* id_number);  //按身份证查找
 //【参数设计】需要知道"在哪个链表找"+"找谁"
 
+//以下为物业管理员的功能实现：
+/* 
+    【按身份证号删除节点】
+  - 找到身份证匹配的节点，从链表里摘除并free
+  - 返回1表示成功删除，0表示找不到
+*/
+int list_Remove(ResidentList* list, const char* id_number);
+
+/*
+    【打印所有住户（遍历）】
+  - 从第一个真数据节点开始，打印每一户的核心信息
+  - 用于"查看住户列表"功能
+*/
+void list_Print(ResidentList* list);
+
 #endif

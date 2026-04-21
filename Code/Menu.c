@@ -23,16 +23,16 @@ static void clear_stdin(void){
 /*
 【读取一个整数选项】
  封装scanf的逻辑，返回用户输入的数字。
- 如果用户输入非数字（比如 "abc"）,scanf 返回 0,我们返回-1表示错误。
+ 如果用户输入非数字（比如 "abc"）,scanf返回0,我们返回-1表示错误。
 */
 static int read_choice(void){
     int choice;
     if(scanf("%d", &choice) != 1){
         /*用户输入的不是数字*/
-        clear_stdin();     //清掉那些字母，否则下次scanf又读到它们
+        clear_stdin();     //清掉那些字母，否则下次scanf又读到它们!!
         return -1;
     }
-    clear_stdin();         //清掉数字后面的 \n
+    clear_stdin();         //清掉数字后面的\n
     return choice;
 }
 //【总结！！】
@@ -89,6 +89,7 @@ static void menu_Manager(ResidentList* list) {
     }
 }
 //【函数调用栈】return只终结当前这个函数，把控制权交还给调用它的那个函数。
+//函数调用栈就像是在叠盘子
 /*
 Step1. ：main调用menu_Main
         程序在menu_Main里运行
