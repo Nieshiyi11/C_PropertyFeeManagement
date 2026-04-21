@@ -88,6 +88,25 @@ static void menu_Manager(ResidentList* list) {
         }
     }
 }
+//【函数调用栈】return只终结当前这个函数，把控制权交还给调用它的那个函数。
+/*
+Step1. ：main调用menu_Main
+        程序在menu_Main里运行
+
+Step2. ：选了 1
+         menu_Main调用menu_Manager
+         程序进入menu_Manager（menu_Main暂停，等待ing）
+
+Step3. ：我们在子菜单里做各种操作
+         程序一直在menu_Manager里循环
+
+Step4. ： 选了 0
+          case 0: return;
+          menu_Manager结束
+          回到menu_Main里，刚才调用menu_Manager的下一行继续执行
+          menu_Main继续循环，重新显示主菜单
+*/
+// return让menu_Manager结束。但程序没结束：它回到了调用menu_Manager的地方，也就是menu_Main里继续跑。
 
 /* ==================== 住户子菜单 ==================== */
 static void menu_Resident(ResidentList* list) {
