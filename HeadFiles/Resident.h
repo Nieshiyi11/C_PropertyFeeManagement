@@ -17,3 +17,15 @@ typedef struct{
 }Resident;
 
 #endif  //结束 #ifndef
+
+
+
+/*
+单个.c文件中怎么会发生“重复定义”问题呢？？
+For example：
+
+#include "Resident.h"     //第一次包含Resident.h
+#include "Linked_List.h"  //这里面又包含了Resident.h
+
+#include 的本质就是文本粘贴！！
+*/
