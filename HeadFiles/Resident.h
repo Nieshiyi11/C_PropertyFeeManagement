@@ -1,5 +1,5 @@
 #ifndef RESIDENT   //头文件守卫: 防止同一个头文件被多次#include导致"重复定义"错误
-#define RESIDENT   //定于这个头文件
+#define RESIDENT   //定义这个头文件
 
 /* ==================== 住户信息结构体 ==================== */
 typedef struct{
