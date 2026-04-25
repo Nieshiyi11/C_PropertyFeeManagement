@@ -47,3 +47,40 @@ Step2. Configure powershell encoding
 Step3. Configure the tasks.json file
 
 Step4. Set VS Code default file encoding to UTF-8
+
+---
+
+## 📁 项目结构 (Project Structure)
+
+```
+C_PropertyFeeManagement/
+├── .vscode/
+│   └── tasks.json              # 编译配置（UTF-8 全链路）
+│
+├── HeadFiles/                  # 头文件 / 接口声明
+│   ├── Resident.h              # 住户结构体
+│   ├── Linked_List.h           # 链表接口
+│   ├── Login.h                 # 登录接口
+│   ├── Menu.h                  # 菜单接口
+│   ├── Manager.h               # 物业经理接口
+│   ├── Fee.h                   # 物业费接口
+│   ├── Stats.h                 # 统计接口
+│   └── FileIO.h                # 文件读写接口
+│
+├── Code/                       # 源文件 / 实现
+│   ├── InterfaceFunction.c     # 链表实现（增删改查）
+│   ├── Login.c                 # 登录验证
+│   ├── Menu.c                  # 三层菜单
+│   ├── Manager.c               # 物业经理模块
+│   ├── Fee.c                   # 费用计算 + 缴费
+│   ├── Stats.c                 # 统计 + 排序
+│   ├── FileIO.c                # 数据持久化
+│   └── main.c                  # 程序入口
+│
+├── Images/
+│   └── 项目要求.jpg
+│
+├── data.txt                    # 数据持久化文件（运行时生成）
+└── test.exe                    # 编译产物（运行时生成）
+```
+---
