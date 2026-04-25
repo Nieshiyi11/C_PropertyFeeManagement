@@ -3,6 +3,7 @@
 #include "../HeadFiles/Menu.h"
 #include "../HeadFiles/Manager.h"
 #include "../HeadFiles/Fee.h"
+#include "../HeadFiles/Stats.h"
 //【while(1) + switch-case +break 是C语言项目中菜单的经典实现方法！！】
 
 
@@ -55,8 +56,9 @@ static void menu_Manager(ResidentList* list) {
         printf("2. 修改住户信息\n");
         printf("3. 删除住户信息\n");
         printf("4. 查看住户列表\n");
-        printf("5. 按楼号统计未缴费\n");
-        printf("6. 按欠款排序\n");
+        printf("5. 生成本月物业费\n");
+        printf("6. 按楼号统计未缴费\n");
+        printf("7. 按欠款排序\n");
         printf("0. 返回主菜单\n");
         printf("请选择：");
         //读取选择
@@ -79,7 +81,10 @@ static void menu_Manager(ResidentList* list) {
                 fee_GenerateAll(list);
                 break;
             case 6:
-                printf("[板块⑦] 按欠款排序功能开发中...\n");
+                stats_Building(list);
+                break;
+            case 7:
+                stats_Sort(list);
                 break;
             case 0:
                 return;   //退出本函数，回到menu_Main

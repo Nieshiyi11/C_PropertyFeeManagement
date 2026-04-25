@@ -6,7 +6,7 @@
 
 /* ==================== 定义链表节点 ==================== */
 typedef struct Node{   //这里也写上Node是因为内部要自引用 （可以看到内部有：struct Node* next;）
-    Resident data;     //住户数据
+    Resident data;     //住户数据（注意此处是结构体变量！！）
     struct Node* next; //指向下一个节点
 }Node;                 //外部引用，typedef出来的起个名字
 
