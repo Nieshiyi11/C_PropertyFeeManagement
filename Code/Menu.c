@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "../HeadFiles/Menu.h"
 #include "../HeadFiles/Manager.h"
+#include "../HeadFiles/Fee.h"
 //【while(1) + switch-case +break 是C语言项目中菜单的经典实现方法！！】
 
 
@@ -66,16 +67,16 @@ static void menu_Manager(ResidentList* list) {
                 manager_AddResident(list); 
                 break;
             case 2:
-                printf("[板块④] 修改住户功能开发中...\n");
+                manager_ModifyResident(list);
                 break;
             case 3:
-                printf("[板块④] 删除住户功能开发中...\n");
+                manager_DeleteResident(list);
                 break;
             case 4:
                 manager_ViewAll(list);
                 break;
             case 5:
-                printf("[板块⑦] 按楼号统计功能开发中...\n");
+                fee_GenerateAll(list);
                 break;
             case 6:
                 printf("[板块⑦] 按欠款排序功能开发中...\n");
@@ -127,10 +128,10 @@ static void menu_Resident(ResidentList* list) {
                 printf("[板块④] 查询个人信息功能开发中...\n");
                 break;
             case 2:
-                printf("[板块⑤] 查询应缴物业费功能开发中...\n");
+                fee_QueryOne(list);
                 break;
             case 3:
-                printf("[板块⑥] 自助缴费功能开发中...\n");
+                fee_PayOne(list);
                 break;
             case 0:
                 return;  //退出本函数，回到menu_Main

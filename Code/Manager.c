@@ -111,3 +111,148 @@ void manager_ViewAll(ResidentList* list) {
      - sizeof(r.name) = 32，告诉fgets最多读31个字符 + 1个'\0'
      - stdin则表示从键盘读
 */
+
+
+/* ==================== 删除住户 ==================== */
+void manager_DeleteResident(ResidentList* list){
+    if(list == NULL){
+        printf("链表不存在！\n");
+        return;
+    }
+    if(list->size == 0){
+        printf("\n当前没有任何住户记录,无法删除\n");
+        return;
+    }
+    char id_number[20]; //输入要删除的住户的身份证号
+    char confirm[8];    // 
+
+    printf("\n===== 删除住户 =====\n");
+    printf("请输入要删除的身份证号：");
+    fgets(id_number, sizeof(id_number), stdin);
+    id_number[strcspn(id_number, "\n")] = '\0';
+
+    /* 先查找,显示信息让用户确认 */
+    Node* target = list_FindID(list, id_number);
+    if(target == NULL){
+        printf("\n未找到身份证号为 %s 的住户\n", id_number);
+        return;
+    }
+
+    /* 找到了就显示要删除的住户信息 */
+    printf("\n找到该住户:\n");
+    printf("  姓名：%s\n", target->data.name);
+    printf("  楼号：%d-%d-%d\n", target->data.building, target->data.unit, target->data.room);
+    printf("  电话：%s\n", target->data.phone);
+
+    /* 二次确认 */
+    printf("\n确定要删除吗?确认[y/Y],取消[n/N]:");
+    fgets(confirm, sizeof(confirm), stdin);
+    confirm[strcspn(confirm, "\n")] = '\0';
+    /* 正式删除住户信息 */
+    if(strcmp(confirm, "y") == 0 || strcmp(confirm, "Y") == 0){
+        if(list_Remove(list, id_number)){
+            printf("\n删除成功! 当前共 %d 户\n", list->size);
+        }else{
+            printf("\n删除失败\n");
+        }
+    }else{
+        printf("\n已取消删除\n");
+    }
+}
+
+
+/* ==================== 修改住户 ==================== */
+void manager_ModifyResident(ResidentList* list){
+    if(list == NULL){
+        printf("链表不存在！\n");
+        return;
+    }
+    if(list->size == 0){
+        printf("\n当前没有任何住户记录,无法修改\n");
+        return;
+    }
+    char id_number[20];
+
+    printf("\n===== 修改住户信息 =====\n");
+    printf("请输入要修改的身份证号：");
+    fgets(id_number, sizeof(id_number), stdin);
+    id_number[strcspn(id_number, "\n")] = '\0';
+
+    Node* target = list_FindID(list, id_number);
+    if(target == NULL){
+        printf("\n未找到身份证号为 %s 的住户\n", id_number);
+        return;
+    }
+
+    /* 显示当前信息 */
+    printf("\n当前住户信息:\n");
+    printf("  1. 姓名：%s\n", target->data.name);
+    printf("  2. 性别：%s\n", target->data.gender);
+    printf("  3. 联系电话：%s\n", target->data.phone);
+    printf("  4. 楼号：%d\n", target->data.building);
+    printf("  5. 单元号：%d\n", target->data.unit);
+    printf("  6. 房号：%d\n", target->data.room);
+    printf("  7. 平米数：%.1f\n", target->data.area);
+    printf("  8. 每平米物业价格：%.2f\n", target->data.pricePer);
+    printf("  9. 备注：%s\n", target->data.remark);
+    printf("  0. 取消修改\n");
+    printf("\n请选择要修改的字段:");
+    /* 做选择 */
+    int choice;
+    scanf("%d", &choice);
+    while (getchar() != '\n');   //清掉scanf留下的换行符
+    switch(choice){
+        case 1:
+            printf("新姓名：");
+            fgets(target->data.name, sizeof(target->data.name), stdin);
+            target->data.name[strcspn(target->data.name, "\n")] = '\0';
+            break;
+        case 2:
+            printf("新性别：");
+            fgets(target->data.gender, sizeof(target->data.gender), stdin);
+            target->data.gender[strcspn(target->data.gender, "\n")] = '\0';
+            break;
+        case 3:
+            printf("新电话：");
+            fgets(target->data.phone, sizeof(target->data.phone), stdin);
+            target->data.phone[strcspn(target->data.phone, "\n")] = '\0';
+            break;
+        case 4:
+            printf("新楼号：");
+            scanf("%d", &target->data.building);
+            while (getchar() != '\n');
+            break;
+        case 5:
+            printf("新单元号：");
+            scanf("%d", &target->data.unit);
+            while (getchar() != '\n');
+            break;
+        case 6:
+            printf("新房号：");
+            scanf("%d", &target->data.room);
+            while (getchar() != '\n');
+            break;
+        case 7:
+            printf("新平米数：");
+            scanf("%lf", &target->data.area);
+            while (getchar() != '\n');
+            break;
+        case 8:
+            printf("新每平米价格：");
+            scanf("%lf", &target->data.pricePer);
+            while (getchar() != '\n');
+            break;
+        case 9:
+            printf("新备注：");
+            fgets(target->data.remark, sizeof(target->data.remark), stdin);
+            target->data.remark[strcspn(target->data.remark, "\n")] = '\0';
+            break;
+        case 0:
+            printf("\n已取消修改\n");
+            return;
+        default:
+            printf("\n无效选择,已取消修改\n");
+            return;
+    }
+    printf("\n修改成功!\n");
+}

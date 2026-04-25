@@ -15,6 +15,7 @@
                 "${workspaceFolder}/Code/Login.c",             //自己的实际文件长什么样子就怎么写
                 "${workspaceFolder}/Code/Menu.c",              //自己的实际文件长什么样子就怎么写
                 "${workspaceFolder}/Code/Manager.c",           //自己的实际文件长什么样子就怎么写
+                "${workspaceFolder}/Code/Fee.c",               //自己的实际文件长什么样子就怎么写
                 "${workspaceFolder}/Code/main.c",              //自己的实际文件长什么样子就怎么写
                 "-o",          //记住（output的意思）
                 "${workspaceFolder}/test.exe"  //最后一个元素后面无逗号 ,

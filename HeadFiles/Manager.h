@@ -13,7 +13,8 @@
 void manager_AddResident(ResidentList* list);
 /*查看所有住户列表*/
 void manager_ViewAll(ResidentList* list);
-/*修改住户*/
-
-/*删除住户*/
+/* 修改住户：输入身份证 → 找到 → 显示当前信息 → 选要改的字段 → 修改 */
+void manager_ModifyResident(ResidentList* list);
+/* 删除住户：输入身份证 → 确认 → 删除 */
+void manager_DeleteResident(ResidentList* list);
 #endif
