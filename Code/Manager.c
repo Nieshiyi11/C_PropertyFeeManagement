@@ -256,3 +256,43 @@ void manager_ModifyResident(ResidentList* list){
     }
     printf("\n修改成功!\n");
 }
+
+
+/* ==================== 住户查询个人信息 ==================== */
+void resident_QueryInfo(ResidentList* list){
+    if(list == NULL || list->size == 0){
+        printf("\n当前没有任何住户记录\n");
+        return;
+    }
+
+    char id_number[20];
+    printf("\n===== 查询个人信息 =====\n");
+    printf("请输入您的身份证号：");
+    fgets(id_number, sizeof(id_number), stdin);
+    id_number[strcspn(id_number, "\n")] = '\0';
+
+    Node* target = list_FindID(list, id_number);
+    if(target == NULL){
+        printf("\n未找到身份证号为 %s 的住户\n", id_number);
+        return;
+    }
+
+    /* 显示完整信息 */
+    printf("\n===== 您的个人信息 =====\n");
+    printf("户主姓名：%s\n",       target->data.name);
+    printf("性别：    %s\n",       target->data.gender);
+    printf("身份证号：%s\n",       target->data.id_number);
+    printf("联系电话：%s\n",       target->data.phone);
+    printf("住址：    %d楼 %d单元 %d号\n",target->data.building, target->data.unit, target->data.room);
+    printf("面积：    %.1f ㎡\n",  target->data.area);
+    printf("单价：    %.2f 元/㎡\n", target->data.pricePer);
+    /* 应缴费三态显示 */
+    if(target->data.fee_due > 0){
+        printf("应缴费：  %.2f 元（欠费）\n", target->data.fee_due);
+    }else if(target->data.fee_due < 0){
+        printf("应缴费：  已预存 %.2f 元\n", -target->data.fee_due);
+    }else{
+        printf("应缴费：  0.00 元（已付清）\n");
+    }
+    printf("备注：    %s\n", target->data.remark);
+}

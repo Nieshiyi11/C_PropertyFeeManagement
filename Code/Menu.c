@@ -129,7 +129,7 @@ static void menu_Resident(ResidentList* list) {
         int choice = read_choice();
         switch (choice) {
             case 1:
-                printf("[板块④] 查询个人信息功能开发中...\n");
+                resident_QueryInfo(list);
                 break;
             case 2:
                 fee_QueryOne(list);

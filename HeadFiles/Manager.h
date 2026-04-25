@@ -17,4 +17,6 @@ void manager_ViewAll(ResidentList* list);
 void manager_ModifyResident(ResidentList* list);
 /* 删除住户：输入身份证 → 确认 → 删除 */
 void manager_DeleteResident(ResidentList* list);
+/* 用户自己查询个人信息（不属于物业经理的功能） */
+void resident_QueryInfo(ResidentList* list);
 #endif
