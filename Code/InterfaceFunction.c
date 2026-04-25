@@ -98,7 +98,7 @@ Node* list_FindID(ResidentList* list, const char* id_number){
 
 /* ---------- 按身份证删除节点 ---------- */
 int list_Remove(ResidentList* list, const char* id_number){
-    if(list == NULL && id_number == NULL){
+    if(list == NULL || id_number == NULL){
         return 0;
     }
     Node* prev = list->head;  //哑节点是最完美的节点
@@ -111,7 +111,7 @@ int list_Remove(ResidentList* list, const char* id_number){
             return 1;
         }
         //没找到该住户的话，两个指针一起往后走
-        prev = prev->next;  //或：prev = curr;
+        prev = curr;  //这是推荐写法（也可以写成 prev = prev->next; 等价但不推荐）
         curr = curr->next;
     }
     //遍历完了还没找到:

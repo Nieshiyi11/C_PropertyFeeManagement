@@ -3,7 +3,7 @@
 
 /* ==================== 住户信息结构体 ==================== */
 typedef struct{
-    char   name[32];         //户主姓名
+    char   name[32];         //住户姓名
     char   gender[8];        //性别
     char   id_number[20];    //身份证号
     char   phone[16];        //联系电话

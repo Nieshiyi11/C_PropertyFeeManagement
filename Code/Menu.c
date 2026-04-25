@@ -1,6 +1,7 @@
 /*==================== 菜单系统实现 ====================*/
 #include <stdio.h>
 #include "../HeadFiles/Menu.h"
+#include "../HeadFiles/Manager.h"
 //【while(1) + switch-case +break 是C语言项目中菜单的经典实现方法！！】
 
 
@@ -47,7 +48,6 @@ scanf返回成功读取的参数个数。想读1个整数，成功就返回1
 
 /* ==================== 物业经理子菜单 ==================== */
 static void menu_Manager(ResidentList* list) {
-    (void)list;  // 暂时不用 list，加这行避免编译警告
     while (1) {
         printf("\n===== 物业经理模块 =====\n");
         printf("1. 添加住户信息\n");
@@ -63,7 +63,7 @@ static void menu_Manager(ResidentList* list) {
 
         switch (choice) {
             case 1:
-                printf("[板块④] 添加住户功能开发中...\n");
+                manager_AddResident(list); 
                 break;
             case 2:
                 printf("[板块④] 修改住户功能开发中...\n");
@@ -72,7 +72,7 @@ static void menu_Manager(ResidentList* list) {
                 printf("[板块④] 删除住户功能开发中...\n");
                 break;
             case 4:
-                printf("[板块④] 查看住户列表功能开发中...\n");
+                manager_ViewAll(list);
                 break;
             case 5:
                 printf("[板块⑦] 按楼号统计功能开发中...\n");
