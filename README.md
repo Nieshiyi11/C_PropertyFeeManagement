@@ -47,3 +47,9 @@ Step2. Configure powershell encoding
 Step3. Configure the tasks.json file
 
 Step4. Set VS Code default file encoding to UTF-8
+
+---
+
+【📒飞书笔记】https://wonderfulworld.feishu.cn/docx/D7XudwnmVoo5tKxJt3ZcdQ7Znkp?from=from_copylink
+
+[📒Feishu note]:https://wonderfulworld.feishu.cn/docx/D7XudwnmVoo5tKxJt3ZcdQ7Znkp?from=from_copylink
