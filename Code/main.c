@@ -5,14 +5,14 @@
 #include "../HeadFiles/Menu.h"
 #include "../HeadFiles/FileIO.h"
 
-int main(void) {
+int main(void){
     //1.登录
-    if (!login()) {
+    if (!login()){
         return 1;
     }
     //2. 创建链表
     ResidentList* list = list_Create();
-    if (list == NULL) {
+    if (list == NULL){
         printf("内存分配失败，程序退出\n");
         return 1;
     }

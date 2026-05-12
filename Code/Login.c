@@ -41,7 +41,7 @@ for(int i = 0; s[i] != '\0'; i++){
 
 
 /* ---------- 登录函数 ---------- */
-int login(void) {
+int login(void){
     char username[32];
     char password[32];
     printf("============================\n");

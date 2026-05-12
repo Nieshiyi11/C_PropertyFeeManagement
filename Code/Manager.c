@@ -101,7 +101,7 @@ void manager_AddResident(ResidentList* list){
 
 
 /* ==================== 查看所有住户 ==================== */
-void manager_ViewAll(ResidentList* list) {
+void manager_ViewAll(ResidentList* list){
     list_Print(list);   // 直接调用链表层的打印函数
 }
 /*   

@@ -16,7 +16,7 @@
 */
 static void clear_stdin(void){
     int c;
-    while ((c = getchar()) != '\n' && c != EOF) {
+    while ((c = getchar()) != '\n' && c != EOF){
         //把缓冲区里剩下的字符全丢掉
         //这个循环不断读字符直到遇到换行符或文件结束，相当于"清扫"缓冲区
     }
@@ -49,7 +49,7 @@ scanf返回成功读取的参数个数。想读1个整数，成功就返回1
 
 
 /* ==================== 物业经理子菜单 ==================== */
-static void menu_Manager(ResidentList* list) {
+static void menu_Manager(ResidentList* list){
     while (1) {
         printf("\n===== 物业经理模块 =====\n");
         printf("1. 添加住户信息\n");
@@ -116,7 +116,7 @@ Step4. ： 选了 0
 // return让menu_Manager结束。但程序没结束：它回到了调用menu_Manager的地方，也就是menu_Main里继续跑。
 
 /* ==================== 住户子菜单 ==================== */
-static void menu_Resident(ResidentList* list) {
+static void menu_Resident(ResidentList* list){
     (void)list;
     while (1) {
         printf("\n===== 住户模块 =====\n");
@@ -147,7 +147,7 @@ static void menu_Resident(ResidentList* list) {
 }
 
 /* ==================== 主菜单 ==================== */
-void menu_Main(ResidentList* list) {
+void menu_Main(ResidentList* list){
     while (1) {
         printf("\n===== 主菜单 =====\n");
         printf("1. 物业经理模块\n");
