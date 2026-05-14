@@ -80,3 +80,25 @@ int fileio_Load(ResidentList* list){
     printf("\n[已从文件 %s 加载 %d 户]\n", DATA_FILE, count);
     return 1;
 }
+
+/* ==================== 读取上次生成月份 ==================== */
+int fileio_LoadLastMonth(int* year, int* month){
+    FILE* fp = fopen(MONTH_FILE, "r");
+    if(fp == NULL){
+        return 0;   //文件不存在，说明从未生成过
+    }
+    int ok = (fscanf(fp, "%d %d", year, month) == 2);
+    fclose(fp);
+    return ok;
+}
+
+/* ==================== 保存本次生成的年月 ==================== */
+int fileio_SaveLastMonth(int year, int month){
+    FILE* fp = fopen(MONTH_FILE, "w");
+    if(fp == NULL){
+        return 0;
+    }
+    fprintf(fp, "%d %d\n", year, month);
+    fclose(fp);
+    return 1;
+}

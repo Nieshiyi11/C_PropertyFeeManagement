@@ -8,15 +8,21 @@
 #ifndef FILEIO
 #define FILEIO
 #include "Linked_List.h"
-#define DATA_FILE "data.txt" //含义: 在编译前把所有 DATA_FILE 替换成 "data.txt"。
+#define DATA_FILE "data.txt" //含义: 在编译前把所有 DATA_FILE 替换成 "data.txt"
+#define MONTH_FILE "last_month.txt"
 
 /* ==================== 文件读写模块 ==================== */
 
 /* 从文件加载住户数据到链表(覆盖原有数据) */
 int fileio_Load(ResidentList* list);
-
 /* 把链表数据保存到文件(覆盖原有文件) */
 int fileio_Save(ResidentList* list);
+
+/* 读取上次生成月份，读不到则返回0 */
+// 用int* 指针传参是因为C语言函数没法直接返回两个值，所以用指针把年和月"带出来"
+int fileio_LoadLastMonth(int* year, int* month);
+/* 保存本次生成的年月 */
+int fileio_SaveLastMonth(int year, int month);
 
 #endif
 
