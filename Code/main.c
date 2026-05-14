@@ -21,9 +21,20 @@ int main(void){
     fileio_Load(list); 
 
     //4. 获取系统当前年月
+    /*
+    time(NULL)调用系统时钟，返回从1970年1月1日00:00:00到现在经过的秒数，是个很大的整数，比如1748000000
+    这个秒数存进now里，类型是time_t（本质就是个大整数）
+    传NULL是固定写法，意思是"不需要额外输出，直接返回"
+    */
     time_t now = time(NULL);
+    /*
+    把上面那个大整数 now 转换成人能看懂的年月日时分秒
+    localtime 会把它拆开，装进 struct tm 结构体里
+    &now 是把 now 的地址传进去（因为函数需要指针）
+    之后就可以用 t->tm_year、t->tm_mon 这些字段取出年月了
+    */
     struct tm* t = localtime(&now);
-    int cur_year  = t->tm_year + 1900;  //注意 tm_year 是从1900年开始算的所以要+1900
+    int cur_year  = t->tm_year + 1900;  //注意tm_year 是从1900年开始算的所以要+1900
     int cur_month = t->tm_mon + 1;  //tm_mon 是从0开始算的（0=1月）所以要+1
  
     //5. 读取上次生成月份，判断是否需要自动生成本月费用
