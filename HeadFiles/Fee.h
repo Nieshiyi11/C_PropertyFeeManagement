@@ -14,9 +14,9 @@
 */
 
 /* 物业经理：给所有住户生成本月物业费,自动累加 */
-void fee_GenerateAll(ResidentList* list);
+void fee_GenerateAll(ResidentList* list,int year,int month);
 
-/* 住户：查询自己的应缴物业费 */
+/* 住户：查询自己的指定年月的应缴物业费 */
 void fee_QueryOne(ResidentList* list);
 
 /* 住户：自助缴费(可预存) */

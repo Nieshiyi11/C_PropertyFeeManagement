@@ -1,41 +1,4 @@
 {
-    "version": "2.0.0", //格式版本（固定写这个）
-    "tasks": [          //任务数组（可以有多个任务）
-        {
-            "label": "build",  //任务名（随便起一个名字就行）
-            "type": "shell",   //在shell里执行命令（固定）
-            "command": "gcc",  //主命令
-            "args": [          //命令参数
-                "-Wall",       //记住
-                "-Wextra",     //记住
-                "-g",          //记住
-                "-finput-charset=UTF-8",  //记住
-                "-fexec-charset=UTF-8",   //记住
-                "${workspaceFolder}/Code/InterfaceFunction.c", //自己的实际文件长什么样子就怎么写
-                "${workspaceFolder}/Code/Login.c",             //自己的实际文件长什么样子就怎么写
-                "${workspaceFolder}/Code/Menu.c",              //自己的实际文件长什么样子就怎么写
-                "${workspaceFolder}/Code/Manager.c",           //自己的实际文件长什么样子就怎么写
-                "${workspaceFolder}/Code/Fee.c",               //自己的实际文件长什么样子就怎么写
-                "${workspaceFolder}/Code/Stats.c",             //自己的实际文件长什么样子就怎么写
-                "${workspaceFolder}/Code/FileIO.c",            //自己的实际文件长什么样子就怎么写
-                "${workspaceFolder}/Code/main.c",              //自己的实际文件长什么样子就怎么写
-                "-o",          //记住（output的意思）
-                "${workspaceFolder}/test.exe"  //最后一个元素后面无逗号 ,
-            ],
-            "group": {
-                "kind": "build",   //任务分类（build/test/none）
-                "isDefault": true  //true表示“Ctrl+Shift+B”默认跑这个 最后一个元素后面无逗号 ,
-            },
-            "problemMatcher": ["$gcc"],    //解析报错格式（gcc用$gcc）
-            "detail": "Compile C project"  //可选说明文字             最后一个元素后面无逗号 ,
-        }
-    ]
-}
-
-/*
-或者用：
-
-{
     "version": "2.0.0",
     "tasks": [
         {
@@ -55,5 +18,3 @@
         }
     ]
 }
-
-*/
