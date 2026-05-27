@@ -1,6 +1,15 @@
 #ifndef RESIDENT   //头文件守卫: 防止同一个头文件被多次#include导致"重复定义"错误
 #define RESIDENT   //定义这个头文件
 
+/* ==================== 单月消费记录 ==================== */
+#define MAX_FEE_RECORDS 36
+typedef struct{
+    int    year;
+    int    month;
+    double amount;    //当月费用（面积*单价）
+    double paid;      //已缴金额（0=未缴费 amount=已缴清）
+}FeeRecord;
+
 /* ==================== 住户信息结构体 ==================== */
 typedef struct{
     char   name[32];         //住户姓名
@@ -12,8 +21,9 @@ typedef struct{
     int    room;             //房号
     double area;             //平米数
     double pricePer;         //每平米物业价格
-    double fee_due;          //应缴纳物业费
     char   remark[128];      //备注信息
+    FeeRecord fees[MAX_FEE_RECORDS]; //按月费用记录
+    int    fee_count;        //已有费用记录条数
 }Resident;
 
 #endif  //结束 #ifndef

@@ -9,7 +9,7 @@
 #define FILEIO
 #include "Linked_List.h"
 #define DATA_FILE "data.txt" //含义: 在编译前把所有 DATA_FILE 替换成 "data.txt"
-#define MONTH_FILE "last_month.txt"
+#define MONTH_FILE "last_month.txt" //记录上次生成费用的年月
 
 /* ==================== 文件读写模块 ==================== */
 
