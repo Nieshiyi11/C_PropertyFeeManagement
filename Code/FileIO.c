@@ -18,28 +18,26 @@ int fileio_Save(ResidentList* list){
     Node* p = list->head->next;
     int count = 0;
     while(p != NULL){
-        fprintf(fp, "%s %s %s %s %d %d %d %.2f %.2f %d %s\n",
-                p->data.name,
-                p->data.gender,
-                p->data.id_number,
-                p->data.phone,
-                p->data.building,
-                p->data.unit,
-                p->data.room,
-                p->data.area,
-                p->data.pricePer,
-                p->data.fee_count,
-                p->data.remark);
-        /* 再写每条按月费用记录 */                                                  //修改
-        for(int i = 0; i < p->data.fee_count; i++){                                //修改
-            fprintf(fp, " %d %d %.2f %.2f",                                        //修改
-                    p->data.fees[i].year,                                          //修改
-                    p->data.fees[i].month,                                         //修改
-                    p->data.fees[i].amount,                                        //修改
-                    p->data.fees[i].paid);                                         //修改
-        }                                                                          //修改
-        fprintf(fp, "\n");                                                         //修改
-        count++;                                                                   //修改
+        fprintf(fp, "%s %s %s %s %d %d %d %.2f %.2f %d %s\n",p->data.name,
+                                                             p->data.gender,
+                                                             p->data.id_number,
+                                                             p->data.phone,
+                                                             p->data.building,
+                                                             p->data.unit,
+                                                             p->data.room,
+                                                             p->data.area,
+                                                             p->data.pricePer,
+                                                             p->data.fee_count,
+                                                             p->data.remark);
+        //再写每条按月费用记录                                              
+        for(int i = 0; i < p->data.fee_count; i++){
+            fprintf(fp, " %d %d %.2f %.2f",p->data.fees[i].year,
+                                           p->data.fees[i].month,
+                                           p->data.fees[i].amount,
+                                           p->data.fees[i].paid);
+        }
+        fprintf(fp, "\n");
+        count++;
         p = p->next;
     }
     fclose(fp);
@@ -66,33 +64,31 @@ int fileio_Load(ResidentList* list){
     int count = 0;
     while(1){
         Resident r = {0};   //创建一个空结构体变量，里面所有字段初始置0
-        int fields = fscanf(fp, "%s %s %s %s %d %d %d %lf %lf %d %s",
-                            r.name,
-                            r.gender,
-                            r.id_number,
-                            r.phone,
-                            &r.building,
-                            &r.unit,
-                            &r.room,
-                            &r.area,
-                            &r.pricePer,
-                            &r.fee_count,
-                            r.remark);
+        int fields = fscanf(fp, "%s %s %s %s %d %d %d %lf %lf %d %s",r.name,
+                                                                     r.gender,
+                                                                     r.id_number,
+                                                                     r.phone,
+                                                                     &r.building,
+                                                                     &r.unit,
+                                                                     &r.room,
+                                                                     &r.area,
+                                                                     &r.pricePer,
+                                                                     &r.fee_count,
+                                                                     r.remark);
         if(fields != 11){   //读不到11个字段就退出循环
             break;
         }
-        /* 读取按月费用记录 */                                                      //修改
-        if(r.fee_count > MAX_FEE_RECORDS){                                         //修改
-            r.fee_count = MAX_FEE_RECORDS;                                         //修改
-        }                                                                          //修改
-        for(int i = 0; i < r.fee_count; i++){                                      //修改
-            fscanf(fp, "%d %d %lf %lf",                                            //修改
-                   &r.fees[i].year,                                                //修改
-                   &r.fees[i].month,                                               //修改
-                   &r.fees[i].amount,                                              //修改
-                   &r.fees[i].paid);                                               //修改
-        }                                                                          //修改
-        list_Append(list, r);                                                      //修改
+        //读取按月费用记录
+        if(r.fee_count > MAX_FEE_RECORDS){
+            r.fee_count = MAX_FEE_RECORDS;
+        }
+        for(int i = 0; i < r.fee_count; i++){
+            fscanf(fp, "%d %d %lf %lf",&r.fees[i].year,
+                                       &r.fees[i].month,
+                                       &r.fees[i].amount,
+                                       &r.fees[i].paid);
+        }
+        list_Append(list, r);
         count++; 
     }
 

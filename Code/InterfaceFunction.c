@@ -137,19 +137,23 @@ void list_Print(ResidentList* list){
     // %-4s的意思是：字符串至少4个字符宽度，不够用空格补齐，符号表示左对齐。输出字符串  序号
 
     Node* p = list->head->next;  //跳过哑节点
-    int idx = 1;
+    int index = 1;
     while(p != NULL){
-        printf("%-4d %-10s %-4s %-20s %-13s %d-%d-%-4d %-8.1f %-10.2f\n",
-               idx++,
-               p->data.name,
-               p->data.gender,
-               p->data.id_number,
-               p->data.phone,
-               p->data.building, p->data.unit, p->data.room,
-               p->data.area,
-               p->data.fee_due);
-        //记得更新指针p
-        p = p->next;
+        double unpaid = 0.0;
+        for(int i = 0; i < p->data.fee_count; i++){            
+            unpaid += p->data.fees[i].amount - p->data.fees[i].paid;        
+        }        
+        printf("%-4d %-10s %-4s %-20s %-13s %d-%d-%-4d %-8.1f %-10.2f\n", index++,               
+                                                                          p->data.name,               
+                                                                          p->data.gender,               
+                                                                          p->data.id_number,               
+                                                                          p->data.phone,               
+                                                                          p->data.building, 
+                                                                          p->data.unit, 
+                                                                          p->data.room,               
+                                                                          p->data.area,               
+                                                                          unpaid);        
+        p = p->next;   //记得更新指针p 
     }
     printf("--------------------------------------------------------------------------------\n");
 }

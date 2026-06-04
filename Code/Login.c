@@ -47,18 +47,20 @@ int login(void){
     printf("============================\n");
     printf("    物业费管理用户登录系统\n");
     printf("============================\n");
-    /*给用户3次机会*/
+    //给用户3次机会
     for(int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++){
         printf("\n【您的第%d / %d次尝试】\n", attempt, MAX_ATTEMPTS);
-        /*读用户名*/
+        //读用户名
         printf("请输入用户名：");
         fgets(username, sizeof(username), stdin);
         strip_newline(username);  //吃掉用户按入的回车
-        /*读密码*/
+        
+        //读密码
         printf("请输入您的密码：");
         fgets(password, sizeof(password), stdin);
         strip_newline(password);  //吃掉用户按入的回车
-        /*验证登录*/
+        
+        //验证登录
         if(strcmp(username,CORRECT_USERNAME) == 0 && strcmp(password,CORRECT_PASSWORD) == 0){
             printf("\n登录成功,欢迎进入物业费管理系统!\n");
             return 1;
@@ -69,7 +71,7 @@ int login(void){
             }
         }
     }
-    /*3次都失败*/
+    //*3次都失败
     printf("用户名或密码错误,系统已自动退出\n");
     return 0;
 }

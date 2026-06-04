@@ -3,6 +3,16 @@
 #include "../HeadFiles/Stats.h"
 
 
+/* ==================== 辅助：计算住户累计欠费 ==================== */
+static double calc_unpaid(Resident* r)
+{
+    double total = 0.0;
+    for (int i = 0; i < r->fee_count; i++) {
+        total += r->fees[i].amount - r->fees[i].paid;
+    }
+    return total;
+}
+
 /* ==================== 功能 1：按楼号统计未缴费 ==================== */
 void stats_Building(ResidentList* list){
     if(list == NULL || list->size == 0){
@@ -14,6 +24,7 @@ void stats_Building(ResidentList* list){
     printf("\n===== 按楼号统计未缴费 =====\n");
     printf("请输入楼号：");
     scanf("%d", &target_building);
+    while (getchar() != '\n');
 
     Node* p = list->head->next;  //跳过哑节点
     int count = 0;
@@ -23,10 +34,14 @@ void stats_Building(ResidentList* list){
     printf("--------------------------------------------------\n");
     while(p != NULL){
         /* 楼号匹配并且欠费 */
-        if(p->data.building == target_building && p->data.fee_due > 0){
+        double unpaid = calc_unpaid(&p->data);
+        if (p->data.building == target_building && unpaid > 0) {
             count++;
-            total_debt += p->data.fee_due;
-            printf("  %s  %d-%d-%d  欠费 %.2f 元\n",p->data.name,p->data.building, p->data.unit, p->data.room,p->data.fee_due);
+            total_debt += unpaid;
+            printf("  %s  %d-%d-%d  累计欠费 %.2f 元\n",
+                   p->data.name,
+                   p->data.building, p->data.unit, p->data.room,
+                   unpaid);
         }
         p = p->next;
     }
@@ -53,7 +68,7 @@ void stats_Sort(ResidentList* list){
         Node* a = list->head->next;  //跳过哑节点
         Node* b = a->next;
         for(int j = 0; j < n - 1 - i; j++){ //【内层】；每轮少扫 i 个(后面 i 个已经排好)
-            if(a->data.fee_due < b->data.fee_due){ //前面的更小 → 交换两个节点的data
+            if(calc_unpaid(&a->data) < calc_unpaid(&b->data)){ //前面的更小 → 交换两个节点的data
                 Resident temp = a->data;
                 a->data = b->data;
                 b->data = temp;
@@ -70,7 +85,10 @@ void stats_Sort(ResidentList* list){
     Node* p = list->head->next;
     int idx = 1;
     while(p != NULL){
-        printf("%-4d %-10s %d-%d-%-4d %-10.2f\n",idx++,p->data.name,p->data.building, p->data.unit, p->data.room,p->data.fee_due);
+        printf("%-4d %-10s %d-%d-%-4d %-10.2f\n",idx++,
+                                                 p->data.name,
+                                                 p->data.building, p->data.unit, p->data.room,
+                                                 calc_unpaid(&p->data));
         p = p->next;
     }
     printf("--------------------------------------------------\n");

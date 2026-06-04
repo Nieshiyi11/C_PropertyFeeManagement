@@ -46,6 +46,26 @@ scanf返回成功读取的参数个数。想读1个整数，成功就返回1
 所以必须clear_stdin清掉，否则下次循环又读到同样的字母，死循环
 */
 
+/* ==================== 经理手动输入年月并生成物业费 ==================== */
+static void menu_GenerateFee(ResidentList* list){    
+    int year, month;    
+    printf("\n===== 生成物业费 =====\n");    
+    printf("请输入年份(例如2026): ");
+
+    if(scanf("%d", &year) != 1 || year < 2000 || year > 2100){
+        clear_stdin();
+        printf("年份输入无效，操作取消\n");
+        return;
+    }
+    printf("请输入月份(1-12): ");
+    if(scanf("%d", &month) != 1 || month < 1 || month > 12){
+        clear_stdin();
+        printf("月份输入无效，操作取消\n");
+        return;
+    }
+    clear_stdin();
+    fee_GenerateAll(list, year, month);  //生成当年月的物业费
+}
 
 
 /* ==================== 物业经理子菜单 ==================== */
@@ -56,7 +76,7 @@ static void menu_Manager(ResidentList* list){
         printf("2. 修改住户信息\n");
         printf("3. 删除住户信息\n");
         printf("4. 查看住户列表\n");
-        printf("5. 生成本月物业费\n");
+        printf("5. 生成指定月份物业费\n");
         printf("6. 按楼号统计未缴费\n");
         printf("7. 按欠款排序\n");
         printf("0. 返回主菜单\n");
@@ -78,7 +98,7 @@ static void menu_Manager(ResidentList* list){
                 manager_ViewAll(list);
                 break;
             case 5:
-                fee_GenerateAll(list);
+                menu_GenerateFee(list);
                 break;
             case 6:
                 stats_Building(list);
@@ -117,7 +137,6 @@ Step4. ： 选了 0
 
 /* ==================== 住户子菜单 ==================== */
 static void menu_Resident(ResidentList* list){
-    (void)list;
     while (1) {
         printf("\n===== 住户模块 =====\n");
         printf("1. 查询个人信息\n");

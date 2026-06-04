@@ -12,6 +12,9 @@ static int find_fee_index(Resident* r, int year, int month){
         }
     }
     return -1;   //为什么返回-1？
+    //因为数组下标从0开始，所以有效的索引只会是 0, 1, 2, ... 这些非负数
+    //用-1作为返回值，是一个约定俗成的"哨兵值"，表示没找到。调用方收到-1就知道查无此月
+    //如果用0表示没找到，就和"找到了，在第0条"混淆了，所以选一个永远不可能是合法下标的值-1来区分这两种情况
 }
 
 /* ==================== 物业经理：生成指定年月物业费 ==================== */
@@ -31,24 +34,24 @@ void fee_GenerateAll(ResidentList* list, int year, int month){
     Node* p = list->head->next;
     int count = 0, skip = 0;
     while(p != NULL){
-        /* 检查该月费用是否已存在 */
+        //检查该月费用是否已存在
         if(find_fee_index(&p->data, year, month) >= 0){
             skip++;
             p = p->next;
             continue;
         }
-        /* 检查是否还有空间 */
+        //检查是否还有空间
         if(p->data.fee_count >= MAX_FEE_RECORDS){
             printf("  [警告] %s 的费用记录已满，跳过\n", p->data.name);
             p = p->next;
             continue;
         }
         double monthly = p->data.area * p->data.pricePer;
-        int idx = p->data.fee_count;
-        p->data.fees[idx].year   = year;
-        p->data.fees[idx].month  = month;
-        p->data.fees[idx].amount = monthly;
-        p->data.fees[idx].paid   = 0.0;
+        int index = p->data.fee_count;
+        p->data.fees[index].year   = year;
+        p->data.fees[index].month  = month;
+        p->data.fees[index].amount = monthly;
+        p->data.fees[index].paid   = 0.0;
         p->data.fee_count++;
         count++;
         printf("  [%d] %s  当月费用 %.2f 元\n", count, p->data.name, monthly);
@@ -56,11 +59,11 @@ void fee_GenerateAll(ResidentList* list, int year, int month){
     }
 
     if(skip > 0){
-        printf("\n[提示] %d 户已存在%d年%d月的费用记录，已跳过\n",
+        printf("\n[提示] %d 户已存在%d年%d月的费用记录, 已跳过\n",
                skip, year, month);
     }
     fileio_SaveLastMonth(year, month);
-    printf("\n%d年%d月物业费已生成，共处理 %d 户\n", year, month, count);
+    printf("\n%d年%d月物业费已生成, 共处理 %d 户\n", year, month, count);
 }
 
 
@@ -153,8 +156,7 @@ void fee_PayOne(ResidentList* list){
 
     int idx = find_fee_index(&target->data, year, month);
     if(idx < 0){
-        printf("\n%d年%d月 尚未生成物业费记录，请先联系物业生成费用\n",
-               year, month);
+        printf("\n%d年%d月 尚未生成物业费记录，请先联系物业生成费用\n", year, month);
         return;
     }
 
@@ -162,8 +164,7 @@ void fee_PayOne(ResidentList* list){
     double unpaid = fr->amount - fr->paid;
 
     printf("\n户主: %s\n", target->data.name);
-    printf("%d年%d月 费用 %.2f 元, 已缴 %.2f 元",
-           fr->year, fr->month, fr->amount, fr->paid);
+    printf("%d年%d月 费用 %.2f 元, 已缴 %.2f 元",fr->year, fr->month, fr->amount, fr->paid);
     if(unpaid > 0){
         printf(", 尚欠 %.2f 元\n", unpaid);
     }else{

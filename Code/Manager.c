@@ -22,19 +22,19 @@ void manager_AddResident(ResidentList* list){
 
 
     /* ----------第一部分：读5个【字符串字段】---------- */
-    /* 姓名 */
+    //姓名
     printf("住户姓名：");
     fgets(r.name, sizeof(r.name), stdin);    //把用户输入读到 r.name
     r.name[strcspn(r.name, "\n")] = '\0';    //重要！！去掉末尾的换行符 \n
-    /* 性别 */
+    //性别
     printf("性别（男/女）：");
     fgets(r.gender, sizeof(r.gender), stdin);
     r.gender[strcspn(r.gender, "\n")] = '\0';
-    /* 身份证号 */
+    //身份证号
     printf("身份证号：");
     fgets(r.id_number, sizeof(r.id_number), stdin);
     r.id_number[strcspn(r.id_number, "\n")] = '\0';
-    /* 身份证查重 */
+    //身份证查重
     if(list_FindID(list,r.id_number) != NULL){
         printf("该住户已存在！\n");
         return ;
@@ -44,30 +44,30 @@ void manager_AddResident(ResidentList* list){
       A: 因为Manager.h里#include了Linked_List.h ;
          include是传递的！！
     */
-    /* 联系电话 */
+    //联系电话
     printf("联系电话：");
     fgets(r.phone, sizeof(r.phone), stdin);
     r.phone[strcspn(r.phone, "\n")] = '\0';
 
 
     /* ----------第二部分：读5个【数字字段】---------- */
-    /* 楼号 */
+    //楼号
     printf("楼号：");
     scanf("%d", &r.building);
-    /* 单元号 */
+    //单元号
     printf("单元号：");
     scanf("%d", &r.unit);
-    /* 房号 */
+    //房号
     printf("房号：");
     scanf("%d", &r.room);
-    /* 平米数 */
+    //平米数
     printf("平米数：");
     scanf("%lf", &r.area);  // %lf表示读入double类型数据
-    /* 价格 */
+    //价格
     printf("每平米物业价格：");
     scanf("%lf", &r.pricePer);
-    /* scanf用完后,缓冲区里残留一个\n,要把它清掉 */
-    /* 否则下面的fgets会直接读到这个\n,跳过用户输入*/
+    //scanf用完后,缓冲区里残留一个\n,要把它清掉
+    //否则下面的fgets会直接读到这个\n,跳过用户输入
     while (getchar() != '\n');
 
     /*
@@ -83,13 +83,12 @@ void manager_AddResident(ResidentList* list){
     解决：用 while (getchar() != '\n'); 手动吃掉残留的 \n
     */
 
+
     /* ----------第三部分：再读1个【字符串字段】(备注信息) ---------- */
     printf("备注信息：");
     fgets(r.remark, sizeof(r.remark), stdin);
     r.remark[strcspn(r.remark, "\n")] = '\0';
-    /* 应缴物业费暂时为0(板块⑤会自动计算) */
-    r.fee_due = 0.0;
-
+    r.fee_count = 0;
 
     /* ---------- 第四部分：添加到链表 ---------- */
     if (list_Append(list, r)){
@@ -124,31 +123,31 @@ void manager_DeleteResident(ResidentList* list){
         return;
     }
     char id_number[20]; //输入要删除的住户的身份证号
-    char confirm[8];    // 
+    char confirm[8];
 
     printf("\n===== 删除住户 =====\n");
     printf("请输入要删除的身份证号：");
     fgets(id_number, sizeof(id_number), stdin);
     id_number[strcspn(id_number, "\n")] = '\0';
 
-    /* 先查找,显示信息让用户确认 */
+    //先查找,显示信息让用户确认
     Node* target = list_FindID(list, id_number);
     if(target == NULL){
         printf("\n未找到身份证号为 %s 的住户\n", id_number);
         return;
     }
 
-    /* 找到了就显示要删除的住户信息 */
+    //找到了就显示要删除的住户信息
     printf("\n找到该住户:\n");
     printf("  姓名：%s\n", target->data.name);
     printf("  楼号：%d-%d-%d\n", target->data.building, target->data.unit, target->data.room);
     printf("  电话：%s\n", target->data.phone);
 
-    /* 二次确认 */
+    //二次确认
     printf("\n确定要删除吗?确认[y/Y],取消[n/N]:");
     fgets(confirm, sizeof(confirm), stdin);
     confirm[strcspn(confirm, "\n")] = '\0';
-    /* 正式删除住户信息 */
+    //正式删除住户信息
     if(strcmp(confirm, "y") == 0 || strcmp(confirm, "Y") == 0){
         if(list_Remove(list, id_number)){
             printf("\n删除成功! 当前共 %d 户\n", list->size);
@@ -184,7 +183,7 @@ void manager_ModifyResident(ResidentList* list){
         return;
     }
 
-    /* 显示当前信息 */
+    //显示当前信息
     printf("\n当前住户信息:\n");
     printf("  1. 姓名：%s\n", target->data.name);
     printf("  2. 性别：%s\n", target->data.gender);
@@ -197,7 +196,7 @@ void manager_ModifyResident(ResidentList* list){
     printf("  9. 备注：%s\n", target->data.remark);
     printf("  0. 取消修改\n");
     printf("\n请选择要修改的字段:");
-    /* 做选择 */
+    //做选择
     int choice;
     scanf("%d", &choice);
     while (getchar() != '\n');   //清掉scanf留下的换行符
@@ -277,7 +276,7 @@ void resident_QueryInfo(ResidentList* list){
         return;
     }
 
-    /* 显示完整信息 */
+    //显示完整信息
     printf("\n===== 您的个人信息 =====\n");
     printf("户主姓名：%s\n",       target->data.name);
     printf("性别：    %s\n",       target->data.gender);
@@ -286,13 +285,20 @@ void resident_QueryInfo(ResidentList* list){
     printf("住址：    %d楼 %d单元 %d号\n",target->data.building, target->data.unit, target->data.room);
     printf("面积：    %.1f ㎡\n",  target->data.area);
     printf("单价：    %.2f 元/㎡\n", target->data.pricePer);
-    /* 应缴费三态显示 */
-    if(target->data.fee_due > 0){
-        printf("应缴费：  %.2f 元（欠费）\n", target->data.fee_due);
-    }else if(target->data.fee_due < 0){
-        printf("应缴费：  已预存 %.2f 元\n", -target->data.fee_due);
-    }else{
-        printf("应缴费：  0.00 元（已付清）\n");
+    //按月费用汇总 
+    double total_unpaid = 0.0;    
+    for(int i = 0; i < target->data.fee_count; i++){        
+        total_unpaid += target->data.fees[i].amount - target->data.fees[i].paid;    
     }
+    printf("费用记录：共 %d 个月\n", target->data.fee_count);    
+    if(total_unpaid > 0){        
+        printf("累计欠费：%.2f 元\n", total_unpaid);    
+    }else if(total_unpaid < 0){        
+        printf("累计预存：%.2f 元\n", -total_unpaid);    
+    }else if(target->data.fee_count > 0){        
+        printf("费用状态：已全部缴清\n");    
+    }else{        
+        printf("费用状态：暂无费用记录\n");    
+    }    
     printf("备注：    %s\n", target->data.remark);
 }
