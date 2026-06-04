@@ -27,6 +27,7 @@ void fee_GenerateAll(ResidentList* list, int year, int month){
     
     printf("\n===== 生成 %d年%d月 物业费 =====\n", year, month);
     printf("正在为【所有住户】生成当月费用...\n\n");
+    
     Node* p = list->head->next;
     int count = 0, skip = 0;
     while(p != NULL){

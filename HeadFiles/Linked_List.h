@@ -1,7 +1,7 @@
 /*==================== 链表接口 ====================*/
 #ifndef LINKED_LIST
 #define LINKED_LIST
-#include "Resident.h"  //因为Node里要用上Resident类型
+#include "Resident.h"  //因为 Node 里要用上 Resident 类型
 
 
 /* ==================== 定义链表节点 ==================== */
@@ -12,7 +12,7 @@ typedef struct Node{   //这里也写上Node是因为内部要自引用 （可�
 
 
 /* ==================== 链表（加上哑节点） ==================== */
-typedef struct{  //这里不用写结构体名字是因为内部没有引用这个结构，故不用写
+typedef struct{   //这里不用写结构体名字是因为内部没有引用这个结构，故不用写
     Node* head;   //永远指向哑节点
     int   size;   //不含哑节点的真数据数量
 }ResidentList;
@@ -50,6 +50,7 @@ int list_Append(ResidentList* list, Resident r); //尾插，返回1成功/0失�
 
 Node* list_FindID(ResidentList* list, const char* id_number);  //按身份证查找
 //【参数设计】需要知道"在哪个链表找"+"找谁"
+
 
 //以下为物业管理员的功能实现：
 /* 
