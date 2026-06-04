@@ -87,7 +87,7 @@ void fee_QueryOne(ResidentList* list){
         return;
     }
 
-    printf("请输入要查询的年份(例如2025): ");
+    printf("请输入要查询的年份(例如2026): ");
     if(scanf("%d", &year) != 1 || year < 2000 || year > 2100){
         while(getchar() != '\n');
         printf("年份输入无效，操作取消\n");
@@ -146,7 +146,7 @@ void fee_PayOne(ResidentList* list){
         return;
     }
 
-    printf("请输入要缴纳的年月(例如: 2025 5): ");
+    printf("请输入要缴纳的年月(例如: 2026 6): ");
     if(scanf("%d %d", &year, &month) != 2){
         while(getchar() != '\n');
         printf("输入格式错误，操作取消\n");
