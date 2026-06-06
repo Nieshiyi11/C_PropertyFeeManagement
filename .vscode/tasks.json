@@ -4,13 +4,7 @@
         {
             "label": "Build All C Files",
             "type": "shell",
-            "command": "gcc",
-            "args": [
-                "${workspaceFolder}/Code/*.c",
-                "-I${workspaceFolder}/HeadFiles",
-                "-o",
-                "${workspaceFolder}/Code/test.exe"
-            ],
+            "command": "gcc Code/*.c -I HeadFiles -o test.exe",
             "group": {
                 "kind": "build",
                 "isDefault": true
