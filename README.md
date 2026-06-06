@@ -23,7 +23,22 @@
 
 **[法二]**：配置 JSON 文件
 
-把 args 的第一行改成：` "$(Get-ChildItem ${workspaceFolder}/Code/*.c | % { $_.FullName })", `
+`````
+{
+    "version": "2.0.0",   
+    "tasks": [
+        {
+            "label": "Build All C Files",
+            "type": "shell",
+            "command": "gcc Code/*.c -I HeadFiles -o test.exe",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
+} 
+`````
 
 :)
 
