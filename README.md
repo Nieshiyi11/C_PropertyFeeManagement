@@ -13,8 +13,20 @@
 
 可以将本仓库作为一个C语言知识库看待。
 
+关于如何在 **VS Code** 里编译代码：
+
+**[法一]**：不用配置 JSON 文件，可以在终端手敲 gcc 命令行：
+
+#01. gcc Code/*.c -I HeadFiles -o test
+
+#02. ./test.exe
+
+**[法二]**：配置 JSON 文件
+
+把 args 的第一行改成：` "$(Get-ChildItem ${workspaceFolder}/Code/*.c | % { $_.FullName })", `
 
 :)
+
 
 [English]
 
